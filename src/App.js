@@ -5,8 +5,14 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import { Home } from "./pages/Home";
 import { UserDetail } from "./pages/UserDetail";
 import { Header } from "./components/layout/Header";
+import { Login } from "./components/login/Login";
+import { useCookies } from "react-cookie";
+
+export const ligaCoockie = "ligaLogued";
 
 const App = () => {
+  const [cookies, setCookie] = useCookies([ligaCoockie]);
+
   return (
     <Router>
       <Header />
@@ -14,12 +20,16 @@ const App = () => {
         <Route
           path="/"
           exact
-          render={(props) => <Home auth={true} {...props} />}
+          render={(props) =>
+            !!cookies[ligaCoockie] ? <Home {...props} /> : <Login />
+          }
         />
         <Route
           path="/user-detail"
           exact
-          render={(props) => <UserDetail auth={true} {...props} />}
+          render={(props) => (
+            <UserDetail auth={!!cookies[ligaCoockie]} {...props} />
+          )}
         />
       </Switch>
     </Router>

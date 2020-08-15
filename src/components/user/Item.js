@@ -1,5 +1,5 @@
 import React from "react";
-import { StyledContainer } from "../../../styles/styled";
+import { StyledContainer } from "../../styles/styled";
 export const Item = ({ item, onPress }) => {
   return (
     <StyledContainer onClick={() => onPress(item)}>

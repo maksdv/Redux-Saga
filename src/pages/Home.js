@@ -1,23 +1,17 @@
 import React from "react";
 import { useHistory } from "react-router-dom";
 import { useUserList } from "../customHooks/useUserList";
-import { List } from "../components/layout/user/List";
-export const Home = ({ auth }) => {
+import { List } from "../components/user/List";
+
+export const Home = () => {
   const history = useHistory();
   const { data, loading } = useUserList();
+  console.log(data);
 
   const goTo = (data) => {
-    console.log(data, "----->");
     return history.push("/user-detail", { data });
   };
 
-  if (!auth) {
-    return (
-      <div>
-        <p>logueate</p>
-      </div>
-    );
-  }
   if (loading) return <p>cargando</p>;
 
   return (

@@ -3,7 +3,8 @@ import { createStore } from "@reduxjs/toolkit";
 const getUSers = async () => {
   return fetch("https://reqres.in/api/users")
     .then((resp) => resp.json())
-    .then((data) => data.data);
+    .then((data) => data.data)
+    .catch(() => undefined);
 };
 
 const user = async (state, action) => {
