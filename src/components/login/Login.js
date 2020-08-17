@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { login } from "../../api/login";
 import { useCookies } from "react-cookie";
+import { StyledForm, StyledInput, StyledButton } from "../../styles/styled";
 
 export const Login = () => {
   const [email, setEmail] = useState("janet.weaver@reqres.in");
@@ -21,28 +22,29 @@ export const Login = () => {
     }
   };
   return (
-    <div>
-      <form>
-        <label>
-          Email:
-          <input
-            type="text"
-            name="name"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-          />
-        </label>
-        <label>
-          Password:
-          <input
-            type="text"
-            name="pass"
-            value={pass}
-            onChange={(e) => setPass(e.target.value)}
-          />
-        </label>
-        <div onClick={() => handleLogin()}>okkok</div>
-      </form>
-    </div>
+    <StyledForm>
+      <div className="inputsContainer">
+        <StyledInput
+          type="text"
+          name="name"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+        />
+
+        <StyledInput
+          type="text"
+          name="pass"
+          value={pass}
+          onChange={(e) => setPass(e.target.value)}
+        />
+        <StyledButton
+          onClick={() => handleLogin()}
+          primary
+          disabled={!email || !pass}
+        >
+          <span>Login</span>
+        </StyledButton>
+      </div>
+    </StyledForm>
   );
 };
