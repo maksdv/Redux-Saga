@@ -1,14 +1,24 @@
 import React from "react";
 import ReactDOM from "react-dom";
+import { createStore, applyMiddleware } from "redux";
+import { Provider } from "react-redux";
+import createSagaMiddleware from "redux-saga";
 import "./index.css";
 import App from "./App";
 import * as serviceWorker from "./serviceWorker";
-import { CookiesProvider } from "react-cookie";
+import reducer from "./stores/reducers";
+import rootSaga from "./stores/sagas";
+
+const sagaMiddleware = createSagaMiddleware();
+
+const store = createStore(reducer, applyMiddleware(sagaMiddleware));
+
+sagaMiddleware.run(rootSaga);
 
 ReactDOM.render(
-  <CookiesProvider>
+  <Provider store={store}>
     <App />
-  </CookiesProvider>,
+  </Provider>,
   document.getElementById("root")
 );
 

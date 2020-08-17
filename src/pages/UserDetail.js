@@ -1,47 +1,39 @@
-import React from "react";
+import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
-import { StyledUserDetail } from "../styles/styled";
-import EdiText from "react-editext";
+import { UserInfo } from "../components/user/UserInfo";
+import { ActionsBar } from "../common/ActionsBar";
+import { deleteUser } from "../api/delete";
 
 export const UserDetail = ({ auth }) => {
   const history = useHistory();
   const userInfo = history.location.state.data;
+  const [deleted, setDeleted] = useState(false);
 
   if (!auth) {
     history.replace("/");
   }
+
+  const handleDelete = () => {
+    try {
+      deleteUser(userInfo.id).then(resp => console.log(resp));
+    } catch (error) {
+      console.log("errr", error);
+    }
+  };
   return (
     <div>
       <div onClick={() => history.goBack()}>
         <p>goback</p>
       </div>
-      <StyledUserDetail className="detailContainer">
-        <img src={userInfo.avatar} />
-        <div className="infoContainer flex">
-          <div>
-            <p>Name:</p>
-            <p>Surname:</p>
-            <p>Email:</p>
-          </div>
-          <div>
-            <EdiText
-              type="text"
-              value={userInfo.first_name}
-              onSave={() => console.log("..")}
-            />
-            <EdiText
-              type="text"
-              value={userInfo.last_name}
-              onSave={() => console.log("..")}
-            />
-            <EdiText
-              type="text"
-              value={userInfo.email}
-              onSave={() => console.log("..")}
-            />
-          </div>
+
+      {!deleted ? (
+        <div>
+          <UserInfo userInfo={userInfo} />
+          <ActionsBar del={handleDelete} edit={handleDelete} />
         </div>
-      </StyledUserDetail>
+      ) : (
+        <p>El usuario ha sido eliminado</p>
+      )}
     </div>
   );
 };

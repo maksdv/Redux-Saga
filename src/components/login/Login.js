@@ -1,25 +1,29 @@
-import React, { useState } from "react";
-import { login } from "../../api/login";
+import React, { useState, useEffect } from "react";
 import { useCookies } from "react-cookie";
+import { connect } from "react-redux";
+import { getLogin, persistLogin } from "../../stores/functions";
 
-export const Login = () => {
+let Login = props => {
   const [email, setEmail] = useState("janet.weaver@reqres.in");
-  const [pass, setPass] = useState("");
-  const [cookies, setCookie] = useCookies(["ligaLogued"]);
+  const [password, setPass] = useState("");
+
+  useEffect(() => {
+    const userToken = sessionStorage.getItem("userToken");
+    if (userToken) {
+      props.persistLogin(userToken);
+      props.setLogued(true);
+    }
+  }, [props.loggedIn]);
+
   const handleLogin = () => {
     try {
-      login({ email: email, password: pass }).then((resp) => {
-        if (resp.error) {
-          alert(resp.error);
-        } else if (resp.token) {
-          setCookie("ligaLogued", resp.token);
-        }
-      });
+      props.getLogin({ email: email, password: password });
     } catch (error) {
       // Here we can send an email for register the error log
       console.log(error);
     }
   };
+
   return (
     <div>
       <form>
@@ -29,16 +33,16 @@ export const Login = () => {
             type="text"
             name="name"
             value={email}
-            onChange={(e) => setEmail(e.target.value)}
+            onChange={e => setEmail(e.target.value)}
           />
         </label>
         <label>
           Password:
           <input
-            type="text"
+            type="password"
             name="pass"
-            value={pass}
-            onChange={(e) => setPass(e.target.value)}
+            value={password}
+            onChange={e => setPass(e.target.value)}
           />
         </label>
         <div onClick={() => handleLogin()}>okkok</div>
@@ -46,3 +50,14 @@ export const Login = () => {
     </div>
   );
 };
+const mapDispatchToProps = {
+  getLogin: getLogin,
+  persistLogin: persistLogin
+};
+
+const mapStateToProps = state => ({
+  loggedIn: state.loggedIn
+});
+
+Login = connect(mapStateToProps, mapDispatchToProps)(Login);
+export default Login;

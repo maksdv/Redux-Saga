@@ -1,24 +1,24 @@
-import { createStore } from "@reduxjs/toolkit";
+// import { createStore } from "@reduxjs/toolkit";
 
-const getUSers = async () => {
-  return fetch("https://reqres.in/api/users")
-    .then((resp) => resp.json())
-    .then((data) => data.data)
-    .catch(() => undefined);
-};
+// const getUSers = async () => {
+//   return fetch("https://reqres.in/api/users")
+//     .then((resp) => resp.json())
+//     .then((data) => data.data)
+//     .catch(() => undefined);
+// };
 
-const user = async (state, action) => {
-  if (typeof state === "undefined") return {};
+// const user = async (state, action) => {
+//   if (typeof state === "undefined") return {};
 
-  switch (action.type) {
-    case "USER_INFO":
-      return { name: "pepe" };
-    case "LIST_USERS":
-      return getUSers();
+//   switch (action.type) {
+//     case "USER_INFO":
+//       return { name: "pepe" };
+//     case "LIST_USERS":
+//       return getUSers();
 
-    default:
-      return state;
-  }
-};
+//     default:
+//       return state;
+//   }
+// };
 
-export const userStore = createStore(user);
+// export const userStore = createStore(user);
