@@ -2,7 +2,14 @@ import styled from "styled-components";
 
 export const StyledContainer = styled.div`
   display: flex;
+  alignitems: center;
   padding: 1.6em;
+`;
+
+export const StyledContainerCenter = styled.div`
+  display: flex;
+  alignitems: center;
+  justify-content: center;
 `;
 
 export const StyledUserDetail = styled.div`
@@ -32,9 +39,10 @@ export const StyledButton = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  background: ${(props) => (props.primary ? "blue" : "white")};
+
   color: #ffffff;
   height: 6vh;
+  width: 100%;
   &:hover {
     cursor: pointer;
   }

@@ -1,7 +1,7 @@
 import { put, takeLatest, all } from "redux-saga/effects";
 
 function* fetchUsers() {
-  const json = yield fetch("https://reqres.in/api/users").then(response =>
+  const json = yield fetch("https://reqres.in/api/users").then((response) =>
     response.json()
   );
   yield put({ type: "USERS_RECEIVED", json });
@@ -13,10 +13,10 @@ function* fetchLogin(action) {
     method: "POST",
     headers: {
       Accept: "application/json",
-      "Content-Type": "application/json"
+      "Content-Type": "application/json",
     },
-    body: JSON.stringify(userData)
-  }).then(response => response.json());
+    body: JSON.stringify(userData),
+  }).then((response) => response.json());
   yield put({ type: "LOGIN_RECEIVED", json });
 }
 
@@ -34,18 +34,19 @@ function* update(action) {
     method: "PUT",
     headers: {
       Accept: "application/json",
-      "Content-Type": "application/json"
+      "Content-Type": "application/json",
     },
-    body: JSON.stringify({ first_name, last_name, email })
-  }).then(response => response.json());
+    body: JSON.stringify({ first_name, last_name, email }),
+  }).then((response) => response.json());
   yield put({ type: "UPDATE_PUTTED", json });
 }
 
 function* putDelete(action) {
   const { id } = action.userData;
   const json = yield fetch(`https://reqres.in/api/users/${id}`, {
-    method: "DELETE"
-  }).then(response => response);
+    method: "DELETE",
+  }).then((response) => response);
+
   if (json.status === 204) yield put({ type: "DELETE_PUTTED", json });
 }
 

@@ -26,6 +26,16 @@ body {
     @media screen and (max-width: $break-small) {
       grid-template-columns: auto;
     }
+
+    .listItem {
+      background-color: #f5f7da;
+      text-align: left;
+      padding: 1rem 2rem;
+      align-items: center;
+      .listItemText {
+        padding: 0 2rem;
+      }
+    }
   }
 
   .inputsContainer {
@@ -37,10 +47,35 @@ body {
       width: 90vw;
     }
   }
+  .welcome {
+    width: 50vw;
+    margin: 0 auto;
+    p {
+      color: firebrick;
+      font-size: 2rem;
+    }
+  }
+
+  #headerButton {
+    width: 10vw;
+  }
 }
 .flex {
   display: flex;
   justify-content: center;
   align-items: center;
   text-align: left;
+}
+
+//Colors
+
+.red.red {
+  background-color: red;
+}
+.blue.blue {
+  background-color: blue;
+}
+
+.green.green {
+  background-color: green;
 }

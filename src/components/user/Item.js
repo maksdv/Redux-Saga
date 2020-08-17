@@ -1,16 +1,16 @@
 import React from "react";
-import { StyledContainer } from "../../styles/styled";
+import { StyledContainer, StyledContainerCenter } from "../../styles/styled";
 export const Item = ({ item, onPress }) => {
   return (
-    <StyledContainer onClick={() => onPress(item)}>
-      <div>
+    <StyledContainer className="listItem" onClick={() => onPress(item)}>
+      <StyledContainerCenter>
         <img src={item.avatar} />
-      </div>
+      </StyledContainerCenter>
 
-      <div>
-        <p>Name:{item.first_name}</p>
-        <p>Surname:{item.last_name}</p>
-        <p>Email:{item.email}</p>
+      <div className="listItemText">
+        <p>{item.first_name}</p>
+        <p>{item.last_name}</p>
+        <p>{item.email}</p>
       </div>
     </StyledContainer>
   );

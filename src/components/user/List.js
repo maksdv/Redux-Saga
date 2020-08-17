@@ -3,7 +3,6 @@ import { Item } from "./Item";
 import { StyledList } from "../../styles/styled";
 
 export const List = ({ data, onPress }) => {
-  console.log(data, "pppppppp");
   return (
     <StyledList className="usersList">
       {data &&

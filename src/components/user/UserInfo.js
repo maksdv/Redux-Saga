@@ -2,7 +2,12 @@ import React from "react";
 import { StyledUserDetail } from "../../styles/styled";
 import EdiText from "react-editext";
 
-export const UserInfo = ({ userInfo }) => {
+export const UserInfo = ({ userInfo, setUserInfo }) => {
+  let user = userInfo;
+  const handleSave = (field, value) => {
+    user[field] = value;
+    setUserInfo(user);
+  };
   return (
     <StyledUserDetail className="detailContainer">
       <img src={userInfo.avatar} />
@@ -16,17 +21,17 @@ export const UserInfo = ({ userInfo }) => {
           <EdiText
             type="text"
             value={userInfo.first_name}
-            onSave={() => console.log("..")}
+            onSave={(a) => handleSave("first_name", a)}
           />
           <EdiText
             type="text"
             value={userInfo.last_name}
-            onSave={() => console.log("..")}
+            onSave={(a) => handleSave("last_name", a)}
           />
           <EdiText
             type="text"
             value={userInfo.email}
-            onSave={() => console.log("..")}
+            onSave={(a) => handleSave("email", a)}
           />
         </div>
       </div>

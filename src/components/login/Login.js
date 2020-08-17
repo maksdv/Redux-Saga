@@ -2,8 +2,9 @@ import React, { useState, useEffect } from "react";
 import { useCookies } from "react-cookie";
 import { connect } from "react-redux";
 import { getLogin, persistLogin } from "../../stores/functions";
+import { StyledForm, StyledInput, StyledButton } from "../../styles/styled";
 
-let Login = props => {
+let Login = (props) => {
   const [email, setEmail] = useState("janet.weaver@reqres.in");
   const [password, setPass] = useState("");
 
@@ -18,6 +19,7 @@ let Login = props => {
   const handleLogin = () => {
     try {
       props.getLogin({ email: email, password: password });
+      sessionStorage.setItem("mailLogued", email);
     } catch (error) {
       // Here we can send an email for register the error log
       console.log(error);
@@ -31,19 +33,19 @@ let Login = props => {
           type="text"
           name="name"
           value={email}
-          onChange={e => setEmail(e.target.value)}
+          onChange={(e) => setEmail(e.target.value)}
         />
 
         <StyledInput
           type="text"
           name="pass"
-          value={pass}
-          onChange={e => setPass(e.target.value)}
+          value={password}
+          onChange={(e) => setPass(e.target.value)}
         />
         <StyledButton
           onClick={() => handleLogin()}
-          primary
-          disabled={!email || !pass}
+          className="blue"
+          disabled={!email || !password}
         >
           <span>Login</span>
         </StyledButton>
@@ -53,11 +55,11 @@ let Login = props => {
 };
 const mapDispatchToProps = {
   getLogin: getLogin,
-  persistLogin: persistLogin
+  persistLogin: persistLogin,
 };
 
-const mapStateToProps = state => ({
-  loggedIn: state.loggedIn
+const mapStateToProps = (state) => ({
+  loggedIn: state.loggedIn,
 });
 
 Login = connect(mapStateToProps, mapDispatchToProps)(Login);

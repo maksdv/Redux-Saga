@@ -4,7 +4,7 @@ import { connect } from "react-redux";
 import { List } from "../components/user/List";
 import { getUsers } from "../stores/functions";
 
-let Home = props => {
+let Home = (props) => {
   const { getUsers, usersList, loading } = props;
   const history = useHistory();
   //const { data, loading } = useUserList();
@@ -13,15 +13,12 @@ let Home = props => {
     getUsers();
   }, []);
 
-  const goTo = data => {
+  const goTo = (data) => {
     return history.push("/user-detail", { data });
   };
 
-  //if (loading) return <p>cargando</p>;
-
   return (
     <div>
-      <p>logadooo</p>
       {/* <Link to="/user-detail">user go</Link> */}
       {loading ? <p>loading</p> : <List data={usersList} onPress={goTo} />}
     </div>
@@ -29,12 +26,12 @@ let Home = props => {
 };
 
 const mapDispatchToProps = {
-  getUsers: getUsers
+  getUsers: getUsers,
 };
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   loading: state.loading,
-  usersList: state.users
+  usersList: state.users,
 });
 
 Home = connect(mapStateToProps, mapDispatchToProps)(Home);

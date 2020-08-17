@@ -1,13 +1,14 @@
 import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
 import { UserInfo } from "../components/user/UserInfo";
-import { ActionsBar } from "../common/ActionsBar";
-import { deleteUser } from "../api/delete";
+import { ActionsBar } from "../components/common/ActionsBar";
+import { putDelete, update } from "../stores/functions";
+import { connect } from "react-redux";
 
-export const UserDetail = ({ auth }) => {
+let UserDetail = (props) => {
+  const { auth, putDelete, update } = props;
   const history = useHistory();
-  const userInfo = history.location.state.data;
-  const [deleted, setDeleted] = useState(false);
+  const [userInfo, setUserInfo] = useState(history.location.state.data);
 
   if (!auth) {
     history.replace("/");
@@ -15,25 +16,29 @@ export const UserDetail = ({ auth }) => {
 
   const handleDelete = () => {
     try {
-      deleteUser(userInfo.id).then(resp => console.log(resp));
+      putDelete(userInfo.id);
     } catch (error) {
       console.log("errr", error);
     }
   };
+
+  const handleSave = () => {
+    update(userInfo);
+  };
   return (
     <div>
-      <div onClick={() => history.goBack()}>
-        <p>goback</p>
+      <div>
+        <UserInfo userInfo={userInfo} setUserInfo={setUserInfo} />
+        <ActionsBar del={handleDelete} edit={handleSave} />
       </div>
-
-      {!deleted ? (
-        <div>
-          <UserInfo userInfo={userInfo} />
-          <ActionsBar del={handleDelete} edit={handleDelete} />
-        </div>
-      ) : (
-        <p>El usuario ha sido eliminado</p>
-      )}
     </div>
   );
 };
+
+const mapDispatchToProps = {
+  update: update,
+  putDelete: putDelete,
+};
+
+UserDetail = connect(null, mapDispatchToProps)(UserDetail);
+export default UserDetail;

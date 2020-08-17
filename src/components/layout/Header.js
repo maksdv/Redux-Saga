@@ -1,20 +1,64 @@
-import React from "react";
-import { ligaCoockie } from "../../App";
-import { useCookies } from "react-cookie";
+import React, { useState } from "react";
+import { connect } from "react-redux";
+import { doLogout } from "../../stores/functions";
+import { Button } from "../common/Button";
+import { WelcomeComponent } from "../common/WelcomeComponents";
+import { StyledContainer } from "../../styles/styled";
+import { useHistory } from "react-router-dom";
 
-export const Header = () => {
-  const [cookies, setCookie, removeCookie] = useCookies([ligaCoockie]);
+let Header = (props) => {
+  const history = useHistory();
+  const { doLogout, setLogued, logued, usersList } = props;
   const handleLogout = () => {
-    removeCookie(ligaCoockie);
+    doLogout();
+    const userToken = sessionStorage.getItem("userToken");
+    if (!userToken) setLogued(false);
   };
+
+  const handleGoBack = () => {
+    history.goBack();
+  };
+
+  const getOwnUser = () => {
+    if (!usersList) return {};
+    const loguedMail = sessionStorage.getItem("mailLogued");
+    return usersList.filter((user) => user.email === loguedMail);
+  };
+
   return (
     <header>
-      <h2>Header</h2>
-      {cookies[ligaCoockie] ? (
-        <p onClick={() => handleLogout()}>logout</p>
-      ) : (
-        <p></p>
+      {logued && (
+        <div>
+          <StyledContainer>
+            <Button
+              action={handleGoBack}
+              label="Back"
+              color="green"
+              id="headerButton"
+            />
+
+            <Button
+              action={handleLogout}
+              label="LogOut"
+              color="red"
+              id="headerButton"
+            />
+          </StyledContainer>
+          <WelcomeComponent user={getOwnUser()[0]} />
+        </div>
       )}
     </header>
   );
 };
+
+const mapDispatchToProps = {
+  doLogout: doLogout,
+};
+
+const mapStateToProps = (state) => ({
+  usersList: state.users,
+});
+
+Header = connect(mapStateToProps, mapDispatchToProps)(Header);
+
+export default Header;

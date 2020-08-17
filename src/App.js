@@ -4,10 +4,9 @@ import { useEffect, useState } from "react";
 import "./App.scss";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import Home from "./pages/Home";
-import { UserDetail } from "./pages/UserDetail";
-import { Header } from "./components/layout/Header";
+import UserDetail from "./pages/UserDetail";
+import Header from "./components/layout/Header";
 import Login from "./components/login/Login";
-import { useCookies } from "react-cookie";
 import { persistLogin } from "./stores/functions";
 
 export const ligaCoockie = "ligaLogued";
@@ -25,19 +24,19 @@ const App = () => {
 
   return (
     <Router>
-      <Header />
+      <Header setLogued={setLogued} logued={logued} />
       <Switch>
         <Route
           path="/"
           exact
-          render={props =>
+          render={(props) =>
             logued ? <Home {...props} /> : <Login setLogued={setLogued} />
           }
         />
         <Route
           path="/user-detail"
           exact
-          render={props => <UserDetail auth={logued} {...props} />}
+          render={(props) => <UserDetail auth={logued} {...props} />}
         />
       </Switch>
     </Router>
