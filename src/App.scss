@@ -27,6 +27,16 @@ body {
       grid-template-columns: auto;
     }
   }
+
+  .inputsContainer {
+    flex-direction: column;
+    display: flex;
+    width: 30vw;
+    justify-content: space-around;
+    @media screen and (max-width: $break-small) {
+      width: 90vw;
+    }
+  }
 }
 .flex {
   display: flex;
