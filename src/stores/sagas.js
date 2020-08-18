@@ -47,7 +47,8 @@ function* putDelete(action) {
     method: "DELETE",
   }).then((response) => response);
 
-  if (json.status === 204) yield put({ type: "DELETE_PUTTED", json });
+  if (json.status === 204)
+    yield put({ type: "DELETE_PUTTED", json, value: action });
 }
 
 function* actionWatcher() {

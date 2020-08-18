@@ -9,10 +9,21 @@ const reducer = (state = {}, action) => {
     case "USERS_RECEIVED":
       return { ...state, users: action.json.data, loading: false };
     case "LOGIN_RECEIVED":
-      return { ...state, loggedIn: action.json.token, loading: false };
+      return {
+        ...state,
+        loggedIn: action.json.token,
+        loading: false,
+        response: action.json,
+      };
     case "UPDATE_PUTTED":
     case "DELETE_PUTTED":
-      return { ...state, loading: false };
+      if (state.users) {
+        const newUsers = state.users.filter(
+          (user) => user.id !== action.value.userData
+        );
+        state.users = newUsers;
+      }
+      return { ...state, loading: false, deleted: action.value.userData };
     case "LOGOUT":
       return { ...state, loggedIn: false };
     case "WRITE_LOGIN":

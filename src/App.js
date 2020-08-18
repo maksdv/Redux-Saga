@@ -2,20 +2,19 @@ import React from "react";
 import { useEffect, useState } from "react";
 
 import "./App.scss";
-import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Home from "./pages/Home";
 import UserDetail from "./pages/UserDetail";
 import Header from "./components/layout/Header";
 import Login from "./components/login/Login";
 import { persistLogin } from "./stores/functions";
-
-export const ligaCoockie = "ligaLogued";
+import { PrivateRoute } from "./components/utils/PrivateRoute";
 
 const App = () => {
   const [logued, setLogued] = useState(false);
+  const userToken = sessionStorage.getItem("userToken");
 
   useEffect(() => {
-    const userToken = sessionStorage.getItem("userToken");
     if (userToken) {
       persistLogin(userToken);
       setLogued(true);
@@ -33,10 +32,17 @@ const App = () => {
             logued ? <Home {...props} /> : <Login setLogued={setLogued} />
           }
         />
-        <Route
+        {/* <Route
           path="/user-detail"
           exact
-          render={(props) => <UserDetail auth={logued} {...props} />}
+          render={(props) =>
+            logued ? <UserDetail auth={logued} {...props} /> : null
+          }
+        /> */}
+        <PrivateRoute
+          path="/user-detail"
+          token={userToken}
+          component={UserDetail}
         />
       </Switch>
     </Router>

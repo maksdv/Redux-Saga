@@ -42,6 +42,10 @@ let Login = (props) => {
           value={password}
           onChange={(e) => setPass(e.target.value)}
         />
+        {/* Error component */}
+        {props.response && props.response.error && (
+          <p style={{ color: "red" }}>{props.response.error}</p>
+        )}
         <StyledButton
           onClick={() => handleLogin()}
           className="blue"
@@ -60,6 +64,7 @@ const mapDispatchToProps = {
 
 const mapStateToProps = (state) => ({
   loggedIn: state.loggedIn,
+  response: state.response,
 });
 
 Login = connect(mapStateToProps, mapDispatchToProps)(Login);

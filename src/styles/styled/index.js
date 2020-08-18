@@ -30,7 +30,7 @@ export const StyledForm = styled.form`
 
 export const StyledInput = styled.input`
   border: none;
-  height: 5vh;
+  height: 3.5rem;
   margin: 2vh 0;
   padding: 0 1rem;
 `;

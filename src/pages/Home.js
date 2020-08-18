@@ -10,7 +10,7 @@ let Home = (props) => {
   //const { data, loading } = useUserList();
 
   useEffect(() => {
-    getUsers();
+    if (!usersList) getUsers();
   }, []);
 
   const goTo = (data) => {
@@ -19,7 +19,6 @@ let Home = (props) => {
 
   return (
     <div>
-      {/* <Link to="/user-detail">user go</Link> */}
       {loading ? <p>loading</p> : <List data={usersList} onPress={goTo} />}
     </div>
   );
