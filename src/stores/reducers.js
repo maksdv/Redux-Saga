@@ -4,6 +4,12 @@ const reducer = (state = {}, action) => {
     case "GET_LOGIN":
       return { ...state, loggedIn: true };
     case "PUT_UPDATE":
+      if (state.users) {
+        const newUsers = state.users.map((user) =>
+          user.id === action.id ? action : user
+        );
+      }
+      return { ...state, loggedIn: false };
     case "PUT_DELETE":
       return { ...state, loading: true };
     case "USERS_RECEIVED":
@@ -16,6 +22,8 @@ const reducer = (state = {}, action) => {
         response: action.json,
       };
     case "UPDATE_PUTTED":
+      return { ...state, loading: false };
+
     case "DELETE_PUTTED":
       if (state.users) {
         const newUsers = state.users.filter(
@@ -23,7 +31,11 @@ const reducer = (state = {}, action) => {
         );
         state.users = newUsers;
       }
-      return { ...state, loading: false, deleted: action.value.userData };
+      return {
+        ...state,
+        loading: false,
+        deleted: action.value ? action.value.userData : "",
+      };
     case "LOGOUT":
       return { ...state, loggedIn: false };
     case "WRITE_LOGIN":

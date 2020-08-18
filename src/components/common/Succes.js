@@ -26,4 +26,5 @@ const AnimatedText = styled.p`
   justify-content: center;
   animation-name: ${moveAnimaion};
   animation-duration: 1s;
+  color: green;
 `;

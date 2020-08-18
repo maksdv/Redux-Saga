@@ -15,6 +15,8 @@ let UserDetail = (props) => {
     history.location.state ? history.location.state.data : null
   );
 
+  console.log(state);
+
   const handleDelete = () => {
     try {
       putDelete(userInfo.id);

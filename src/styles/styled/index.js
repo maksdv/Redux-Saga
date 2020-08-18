@@ -39,10 +39,10 @@ export const StyledButton = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-
   color: #ffffff;
   height: 6vh;
   width: 100%;
+  border: 1px solid black;
   &:hover {
     cursor: pointer;
   }
