@@ -40,7 +40,7 @@ export const StyledButton = styled.div`
   justify-content: center;
   align-items: center;
   color: #ffffff;
-  height: 6vh;
+  height: 3.5rem;
   width: 100%;
   border: 1px solid black;
   &:hover {
