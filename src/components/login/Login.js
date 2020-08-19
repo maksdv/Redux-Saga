@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import { useCookies } from "react-cookie";
 import { connect } from "react-redux";
 import { getLogin, persistLogin } from "../../stores/functions";
 import { StyledForm, StyledInput, StyledButton } from "../../styles/styled";

@@ -32,13 +32,6 @@ const App = () => {
             logued ? <Home {...props} /> : <Login setLogued={setLogued} />
           }
         />
-        {/* <Route
-          path="/user-detail"
-          exact
-          render={(props) =>
-            logued ? <UserDetail auth={logued} {...props} /> : null
-          }
-        /> */}
         <PrivateRoute
           path="/user-detail"
           token={userToken}
