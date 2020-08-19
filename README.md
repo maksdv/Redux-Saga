@@ -1,29 +1,18 @@
 ![React Logo](https://github.com/vercel/vercel/blob/master/packages/frameworks/logos/react.svg)
 
-# React Example
+# Prueba Tecnica Liguera FrontEnd React
 
-This directory is a brief example of a [React](https://reactjs.org/) app with [Serverless Functions](https://vercel.com/docs/v2/serverless-functions/introduction) that can be deployed with Vercel and zero configuration.
+Una aplicación web con React, Redux, Redux-saga, react-router-dom. 
 
-## Deploy Your Own
+Requerimientos: React.js, Node.
 
-Deploy your own React project, along with Serverless Functions, with Vercel.
+Para arrancar y probar la aplicación en local : 
 
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/import/project?template=https://github.com/vercel/vercel/tree/master/examples/create-react-app-functions)
-
-_Live Example: https://create-react-app.now-examples.now.sh/_
-
-### How We Created This Example
-
-To get started with React, along with [Serverless Functions](https://vercel.com/docs/v2/serverless-functions/introduction), with Vercel, you can use the [Create-React-App CLI](https://reactjs.org/docs/create-a-new-react-app.html#create-react-app) to initialize the project:
-
-```shell
-$ npx create-react-app my-app
+```Terminal (por hhtp)
+$ git clone https://github.com/maksdv/liga.git
+$ npm install
+$ npm run dev
 ```
+Para probar sin necesidad de instalar -> https://liga-eosin.vercel.app/ , se utilizó una herramienta llamada Vercel (integracion continua), de este modo cada vez que hacemos push a la rama master la aplicacion se actualiza. 
 
-### Deploying From Your Terminal
 
-You can deploy your new React project, along with [Serverless Functions](https://vercel.com/docs/v2/serverless-functions/introduction), with a single command from your terminal using [Vercel CLI](https://vercel.com/download):
-
-```shell
-$ vercel
-```
