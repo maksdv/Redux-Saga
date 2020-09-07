@@ -1,6 +1,6 @@
 ![React Logo](https://github.com/vercel/vercel/blob/master/packages/frameworks/logos/react.svg)
 
-# Prueba Tecnica Liguera FrontEnd React
+# Primeros pasos con Redux-Saga. 
 
 Una aplicación web con React, Redux, Redux-saga, react-router-dom. 
 
